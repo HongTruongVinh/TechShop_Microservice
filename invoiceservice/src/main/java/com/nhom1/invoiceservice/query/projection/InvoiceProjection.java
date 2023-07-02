@@ -21,11 +21,14 @@ public class InvoiceProjection {
     private InvoiceRepository invoiceRepository;
 
     @QueryHandler
-    // get all invoice id 
-    public List<InvoiceResponseModel> handle(GetAllInvoiceQuery getAllInvoiceByQuery) {
+    public List<InvoiceResponseModel> handle(GetAllInvoiceQuery getAllInvoiceQuery) {
         List<Invoice> listInvoices = invoiceRepository.findAll();
         List<InvoiceResponseModel> responseModels = new ArrayList<>();
-        BeanUtils.copyProperties(listInvoices, responseModels);
+        listInvoices.forEach(invoice -> {
+            InvoiceResponseModel model = new InvoiceResponseModel();
+            BeanUtils.copyProperties(invoice, model);
+            responseModels.add(model);
+        });
         return responseModels;
     }
 
