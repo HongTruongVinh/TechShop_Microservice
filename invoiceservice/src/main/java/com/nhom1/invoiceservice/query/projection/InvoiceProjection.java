@@ -4,19 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.axonframework.queryhandling.QueryHandler;
-import org.checkerframework.checker.units.qual.m;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.nhom1.invoiceservice.command.data.Invoice;
 import com.nhom1.invoiceservice.command.data.InvoiceRepository;
 import com.nhom1.invoiceservice.query.model.InvoiceResponseModel;
 import com.nhom1.invoiceservice.query.queries.GetAllInvoiceByUserIdQuery;
+import com.nhom1.invoiceservice.query.queries.GetAllInvoiceQuery;
 import com.nhom1.invoiceservice.query.queries.GetInvoiceByIdQuery;
 
+@Component
 public class InvoiceProjection {
     @Autowired
     private InvoiceRepository invoiceRepository;
+
+    @QueryHandler
+    // get all invoice id 
+    public List<InvoiceResponseModel> handle(GetAllInvoiceQuery getAllInvoiceByQuery) {
+        List<Invoice> listInvoices = invoiceRepository.findAll();
+        List<InvoiceResponseModel> responseModels = new ArrayList<>();
+        BeanUtils.copyProperties(listInvoices, responseModels);
+        return responseModels;
+    }
 
     @QueryHandler
     public InvoiceResponseModel handle(GetInvoiceByIdQuery getInvoiceByIdQuery) {

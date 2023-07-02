@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "INVOICE")
 public class Invoice {
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int invoiceID;
 	private int userID;
 	private int totalCost;
@@ -28,7 +26,4 @@ public class Invoice {
 	private boolean otherShippingAddress;
 	private String statusInvoice= "PENDING";
 	private String userInvoiceIndex;
-
-	@OneToMany(mappedBy = "invoiceID")
-	private DetailedInvoice detailedInvoice;
 }

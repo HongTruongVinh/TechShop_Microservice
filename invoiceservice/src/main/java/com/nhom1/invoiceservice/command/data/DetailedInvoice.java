@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 public class DetailedInvoice {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int detailedInvoiceID;
 	private int invoiceID;
 	private int productID;

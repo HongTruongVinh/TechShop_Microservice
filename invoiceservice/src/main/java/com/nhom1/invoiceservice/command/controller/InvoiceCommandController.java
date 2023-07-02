@@ -1,11 +1,14 @@
 package com.nhom1.invoiceservice.command.controller;
 
+import java.util.Random;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +23,10 @@ public class InvoiceCommandController {
     @Autowired
     private CommandGateway commandGateway;
 
+    
     @PostMapping
-    public String addInvoiceString(InvoiceRequestModel model) {
+    public String addInvoiceString(@RequestBody InvoiceRequestModel model) {
+        Random random = new Random();
         CreateInvoiceCommand command = new CreateInvoiceCommand(model.getInvoiceID(), model.getUserID(),
                 model.getTotalCost(), model.getInvoiceDate(), model.getShippingDate(), model.getNote(),
                 model.isOtherShippingAddress(), model.getStatusInvoice(), model.getUserInvoiceIndex());
@@ -29,8 +34,8 @@ public class InvoiceCommandController {
         return "added Invoice";
     }
 
-    @PutMapping()
-    public String updateInvoiceString(InvoiceRequestModel model) {
+    @PutMapping
+    public String updateInvoiceString(@RequestBody InvoiceRequestModel model) {
         UpdateInvoiceCommand command = new UpdateInvoiceCommand(model.getInvoiceID(), model.getUserID(),
                 model.getTotalCost(), model.getInvoiceDate(), model.getShippingDate(), model.getNote(),
                 model.isOtherShippingAddress(), model.getStatusInvoice(), model.getUserInvoiceIndex());

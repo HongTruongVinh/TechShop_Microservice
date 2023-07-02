@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 public class InvoiceserviceApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceserviceApplication.class, args);
 	}

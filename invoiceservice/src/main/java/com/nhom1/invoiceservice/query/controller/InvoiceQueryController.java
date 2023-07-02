@@ -15,7 +15,7 @@ import com.nhom1.invoiceservice.query.queries.GetAllInvoiceQuery;
 import com.nhom1.invoiceservice.query.queries.GetInvoiceByIdQuery;
 
 @RestController
-@RequestMapping("/api/v1/invoice")
+@RequestMapping("/api/v1/invoices")
 public class InvoiceQueryController {
     @Autowired
     private QueryGateway queryGateway;

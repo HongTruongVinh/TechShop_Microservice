@@ -21,6 +21,4 @@ public class InvoiceResponseModel {
 	private boolean otherShippingAddress;
 	private String statusInvoice= "PENDING";
 	private String userInvoiceIndex;
-
-    private List <DetailedInvoice> detailedInvoices;
 }

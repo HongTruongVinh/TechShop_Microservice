@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "SHIPPINGINFO")
 public class ShippingInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int shippingInfoID;
     private int invoiceID;
     private String fullName;
