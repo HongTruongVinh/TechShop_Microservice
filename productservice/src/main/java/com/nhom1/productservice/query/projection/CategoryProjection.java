@@ -8,6 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nhom1.commonservice.model.CategoryResponseCommonModel;
+import com.nhom1.commonservice.query.GetListCategoryQuery;
 import com.nhom1.productservice.command.data.Category;
 import com.nhom1.productservice.command.data.CategoryRepository;
 import com.nhom1.productservice.query.model.CategoryResponseModel;
@@ -36,6 +38,20 @@ public class CategoryProjection {
 		
 		listEntity.forEach(s -> {
 			CategoryResponseModel model = new CategoryResponseModel();
+			BeanUtils.copyProperties(s, model);
+			listCategory.add(model);
+		});
+		return listCategory;
+	}
+	
+	@QueryHandler
+	public List<CategoryResponseCommonModel> handle(GetListCategoryQuery getListCategoryQuery){
+		System.out.print("run getListCtaegory in ProductService");
+		List<Category> listEntity = categoryRepository.findAll();
+		List<CategoryResponseCommonModel> listCategory = new ArrayList<>();
+		
+		listEntity.forEach(s -> {
+			CategoryResponseCommonModel model = new CategoryResponseCommonModel();
 			BeanUtils.copyProperties(s, model);
 			listCategory.add(model);
 		});
