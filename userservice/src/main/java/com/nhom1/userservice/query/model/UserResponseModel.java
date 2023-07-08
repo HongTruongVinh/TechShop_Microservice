@@ -5,7 +5,7 @@ import java.util.Date;
 import com.nhom1.userservice.command.data.Role;
 
 public class UserResponseModel {
-	private int userID;
+	private String userID;
 	private String fullname;
 	private String phone;
 	private String address;
@@ -18,11 +18,11 @@ public class UserResponseModel {
 
 	private Role role;
 	
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 

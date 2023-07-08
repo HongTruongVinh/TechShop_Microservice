@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nhom1.commonservice.model.CategoryResponseCommonModel;
+import com.nhom1.commonservice.query.GetListCategoryQuery;
 import com.nhom1.userservice.query.model.UserResponseModel;
 import com.nhom1.userservice.query.queries.GetAllUserQuery;
 import com.nhom1.userservice.query.queries.GetUserByIdQuery;
@@ -42,5 +44,12 @@ public class UserQueryController {
 		return list;
 	}
 	
-	// GetMapping("/shippingInfo") => shippingInfo not in db onlshop_user
+	@GetMapping("/categoryTest") 
+	public List<CategoryResponseCommonModel> getCategory(){
+		GetListCategoryQuery getListCategoryQuery = new GetListCategoryQuery();
+		System.out.print("get category from userservice");
+		List<CategoryResponseCommonModel> listCategory = queryGateway.query(getListCategoryQuery, 
+				ResponseTypes.multipleInstancesOf(CategoryResponseCommonModel.class)) .join();
+		return listCategory; 
+	}
 }
