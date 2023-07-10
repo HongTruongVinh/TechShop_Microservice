@@ -47,8 +47,9 @@ public class UserQueryController {
 	@GetMapping("/categoryTest") 
 	public List<CategoryResponseCommonModel> getCategory(){
 		GetListCategoryQuery getListCategoryQuery = new GetListCategoryQuery();
-		System.out.print("get category from userservice");
-		List<CategoryResponseCommonModel> listCategory = queryGateway.query(getListCategoryQuery, 
+		System.out.print("get category from userservice\n");
+		List<CategoryResponseCommonModel> listCategory;
+		listCategory = queryGateway.query(getListCategoryQuery, 
 				ResponseTypes.multipleInstancesOf(CategoryResponseCommonModel.class)) .join();
 		return listCategory; 
 	}
