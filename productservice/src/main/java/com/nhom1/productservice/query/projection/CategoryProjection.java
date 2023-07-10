@@ -46,7 +46,7 @@ public class CategoryProjection {
 	
 	@QueryHandler
 	public List<CategoryResponseCommonModel> handle(GetListCategoryQuery getListCategoryQuery){
-		System.out.print("run getListCtaegory in ProductService");
+		
 		List<Category> listEntity = categoryRepository.findAll();
 		List<CategoryResponseCommonModel> listCategory = new ArrayList<>();
 		
@@ -55,6 +55,9 @@ public class CategoryProjection {
 			BeanUtils.copyProperties(s, model);
 			listCategory.add(model);
 		});
+		
+		System.out.println("run getListCtaegory in ProductService:________ count of list " + listCategory.size());
+		
 		return listCategory;
 	}
 	

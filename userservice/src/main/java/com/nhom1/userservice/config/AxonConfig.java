@@ -1,4 +1,4 @@
-package com.nhom1.productservice.config;
+package com.nhom1.userservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
