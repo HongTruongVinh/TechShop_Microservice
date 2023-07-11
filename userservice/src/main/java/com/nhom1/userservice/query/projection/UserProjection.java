@@ -22,7 +22,7 @@ public class UserProjection {
 	@QueryHandler
 	public UserResponseModel handle(GetUserByIdQuery getUserByIdQuery) {
 		UserResponseModel model = new UserResponseModel();
-		User entity = userRepository.getById(getUserByIdQuery.getId());
+		User entity = userRepository.findById(getUserByIdQuery.getId()).get();
 		BeanUtils.copyProperties(entity, model);
 		
 		return model;

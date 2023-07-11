@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nhom1.userservice.command.data.User;
 import com.nhom1.userservice.query.model.RoleResponseModel;
 import com.nhom1.userservice.query.queries.GetAllRoleQuery;
 import com.nhom1.userservice.query.queries.GetRoleByIdQuery;
@@ -20,6 +21,7 @@ public class RoleQueryController {
 	@Autowired
 	private QueryGateway queryGateway;
 	
+
 	@GetMapping("/{id}")
 	public RoleResponseModel getRoleDetail(@PathVariable String id) {
 		GetRoleByIdQuery getRoleByIdQuery = new GetRoleByIdQuery();

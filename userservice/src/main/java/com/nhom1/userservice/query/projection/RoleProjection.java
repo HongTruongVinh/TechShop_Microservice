@@ -23,7 +23,7 @@ public class RoleProjection {
 	@QueryHandler
 	public RoleResponseModel handle(GetRoleByIdQuery getRolebyIdQuery) {
 		RoleResponseModel model = new RoleResponseModel();
-		Role entity = roleRepository.getById(getRolebyIdQuery.getId());
+		Role entity = roleRepository.findById(getRolebyIdQuery.getId()).get();
 		BeanUtils.copyProperties(entity, model);
 		
 		return model;
