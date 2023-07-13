@@ -1,11 +1,6 @@
 package com.nhom1.productservice.query.model;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.nhom1.productservice.command.data.Brand;
-import com.nhom1.productservice.command.data.Category;
-import com.nhom1.productservice.command.data.SaleProduct;
 
 @JsonIgnoreProperties(value= {"saleProducts", "category", "brand"})
 public class ProductResponseModel {

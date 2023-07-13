@@ -1,12 +1,6 @@
-package com.nhom1.userservice.query.model;
+package com.nhom1.commonservice.model;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.nhom1.userservice.command.data.User;
-
-@JsonIgnoreProperties(value= {"users"})
-public class RoleResponseModel {
+public class UserResponeseCommonModel {
 	private String userID;
 	private String fullname;
 	private String phone;
@@ -57,4 +51,6 @@ public class RoleResponseModel {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
+	
+	
 }

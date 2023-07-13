@@ -8,6 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nhom1.commonservice.model.UserResponeseCommonModel;
+import com.nhom1.commonservice.query.GetUserDetailCommonQuery;
 import com.nhom1.userservice.command.data.User;
 import com.nhom1.userservice.command.data.UserRepository;
 import com.nhom1.userservice.query.model.UserResponseModel;
@@ -29,6 +31,15 @@ public class UserProjection {
 	}
 	
 	@QueryHandler
+	public UserResponeseCommonModel handle(GetUserDetailCommonQuery query) {
+		UserResponeseCommonModel model = new UserResponeseCommonModel();
+		User entity = userRepository.findById(query.getUserID()).get();
+		BeanUtils.copyProperties(entity, model);
+		
+		return model;
+	}
+	
+	@QueryHandler
 	public List<UserResponseModel> handle(GetAllUserQuery getAllUserquery){
 		List<User> listEntity = userRepository.findAll();
 		List<UserResponseModel> listUser = new ArrayList<>();
@@ -39,5 +50,13 @@ public class UserProjection {
 			listUser.add(model);
 		});
 		return listUser;
+	}
+	
+	public UserResponseModel setUserResponseModel(User entity) {
+		UserResponseModel model = new UserResponseModel();
+		model.setUserID(entity.getUserID());
+		
+		
+		return model;
 	}
 }

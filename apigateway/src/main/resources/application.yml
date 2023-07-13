@@ -37,6 +37,11 @@ spring:
           uri: http://localhost:9002
           predicates: 
             - Path=/api/v1/invoice/**
+            
+        - id: userservice
+          uri: http://localhost:9003
+          predicates: 
+            - Path=/api/v1/auth/**
         - id: userservice
           uri: http://localhost:9003
           predicates: 

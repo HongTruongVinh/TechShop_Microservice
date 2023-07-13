@@ -50,9 +50,10 @@ public class CategoryProjection {
 		List<CategoryResponseCommonModel> listCategory = new ArrayList<>();
 		
 		listEntity.forEach(s -> {
-			CategoryResponseCommonModel model = new CategoryResponseCommonModel();
-			BeanUtils.copyProperties(s, model);
-			listCategory.add(model);
+			CategoryResponseCommonModel commonModel = new CategoryResponseCommonModel();
+			CategoryResponseModel model = setCategoryResponseModel(s);
+			BeanUtils.copyProperties(model, commonModel);
+			listCategory.add(commonModel);
 		});
 		
 		System.out.println("run getListCtaegory in ProductService:________ count of list " + listCategory.size());

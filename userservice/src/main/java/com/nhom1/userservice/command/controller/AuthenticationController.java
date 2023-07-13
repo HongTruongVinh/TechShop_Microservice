@@ -44,6 +44,9 @@ public class AuthenticationController {
     @PostMapping({"/login"})
     public Object createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException, JSONException, ServletException {
         try {
+        	
+        	System.out.println("mail: " + authenticationRequest.getEmail() + "    pass: " + authenticationRequest.getpswd());
+        	
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getpswd()));
         } catch (BadCredentialsException e) {
 			return new ResponseEntity<String>("Sai thong tin dang nhap", HttpStatus.UNAUTHORIZED);

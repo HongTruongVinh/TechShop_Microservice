@@ -31,6 +31,7 @@ import com.nhom1.productservice.query.queries.GetTrendingProductsQuery;
 @Component
 public class ProductProjection {
 
+	
 	@Autowired
 	private ProductRepository productRepository;
 	@Autowired
