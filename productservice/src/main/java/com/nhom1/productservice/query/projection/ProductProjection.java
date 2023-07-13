@@ -2,6 +2,7 @@ package com.nhom1.productservice.query.projection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +28,8 @@ import com.nhom1.productservice.query.queries.GetRelatedBrandProductsQuery;
 import com.nhom1.productservice.query.queries.GetRelatedCategoryProductsQuery;
 import com.nhom1.productservice.query.queries.GetTopPurchasedByCategoryIdQuery;
 import com.nhom1.productservice.query.queries.GetTrendingProductsQuery;
+import com.nhom1.productservice.query.queries.getProductToAdvise;
+import org.springframework.data.domain.Sort;
 
 @Component
 public class ProductProjection {
@@ -41,7 +44,7 @@ public class ProductProjection {
 	@QueryHandler
 	public ProductResponseModel handle(GetProductQuery getProductQuery) {
 		Product entity = productRepository.getById(getProductQuery.getId());
-		
+
 		ProductResponseModel model = setResponseModel(entity);
 
 		return model;
@@ -136,7 +139,7 @@ public class ProductProjection {
 
 		return listProduct;
 	}
-	
+
 	@QueryHandler
 	public List<ProductResponseModel> handle(GetProductsByCategory query) {
 		List<Product> listEntity = productRepository.findByCategorySlug(query.getCategorySlug());
@@ -149,7 +152,7 @@ public class ProductProjection {
 
 		return listProduct;
 	}
-	
+
 	@QueryHandler
 	public List<ProductResponseModel> handle(GetRelatedCategoryProductsQuery query) {
 		List<Product> listEntity = productRepository.findRelatedProductsByCategory(query.getProductID());
@@ -162,7 +165,7 @@ public class ProductProjection {
 
 		return listProduct;
 	}
-	
+
 	@QueryHandler
 	public List<ProductResponseModel> handle(GetRelatedBrandProductsQuery query) {
 		List<Product> listEntity = productRepository.findRelatedProductsByBrand(query.getProductID());
@@ -175,13 +178,37 @@ public class ProductProjection {
 
 		return listProduct;
 	}
-	
-	
-	
+
+	@QueryHandler
+	public List<ProductResponseModel> handle(getProductToAdvise query) {
+		Sort sort = Sort.by(Sort.Direction.DESC, "productRate");
+		List<Product> products = productRepository.findAll(sort);
+
+		List<Brand> brands = brandRepository.findBrandByNameBrand(query.getbrandName());
+		String brandID = brands.size() > 0 ? brands.get(0).get_id() : "";
+		System.out.println(brandID);
+		List<Category> categorys = categoryRepository.findCategoryByNamCategories(query.getcategoryName());
+		String categoryID = categorys.size() > 0 ? categorys.get(0).getId() : "";
+		System.out.println(categoryID);
+
+		List<ProductResponseModel> ProductsToAdvise = new ArrayList<ProductResponseModel>();
+		System.out.println(query.getPriceMax());
+		for (Product product : products) {
+			if (product.getCategoryID().equals(categoryID) &&
+					product.getBrandID().equals(brandID)
+					&& product.getPrice() >= query.getPriceMin() && product.getPrice() <= query.getPriceMax()) {
+				ProductResponseModel productDTO = setResponseModel(product);
+				ProductsToAdvise.add(productDTO);
+			}
+			if (ProductsToAdvise.size() == 1)
+				break;
+		}
+		return ProductsToAdvise;
+	}
 
 	public ProductResponseModel setResponseModel(Product s) {
 		ProductResponseModel model = new ProductResponseModel();
-		
+
 		Category category = categoryRepository.findCategoryById(s.getCategoryID());
 
 		Brand brand = brandRepository.findBrandById(s.getCategoryID());
@@ -190,12 +217,11 @@ public class ProductProjection {
 			model.setCategoryName(category.getName());
 			model.setCategorySlug(category.getSlug());
 		}
-		
+
 		if (brand != null) {
 			model.setBrandName(brand.getBrandName());
 		}
 
-		
 		model.setProductID(s.getId());
 		model.setProductName(s.getName());
 		model.setProductPrice(s.getPrice());
