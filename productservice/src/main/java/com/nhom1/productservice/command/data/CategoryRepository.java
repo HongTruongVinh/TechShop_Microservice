@@ -7,11 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface CategoryRepository extends JpaRepository<Category, String> {
-	
-	@Query(nativeQuery = true, value="select * from onlshop_product.category p where p._id = :id")
+
+	@Query(nativeQuery = true, value = "select * from onlshop_product.category p where p._id = :id")
 	public Category findCategoryById(@Param("id") String id);
-	
-	@Query(nativeQuery = true, value="select * from onlshop_product.category")
+
+	@Query(nativeQuery = true, value = "select * from onlshop_product.category p where p.categoryName = :categoryName")
+	public List<Category> findCategoryByNamCategories(@Param("categoryName") String categoryName);
+
+	@Query(nativeQuery = true, value = "select * from onlshop_product.category")
 	public List<Category> findAllCategory();
-	
+
 }

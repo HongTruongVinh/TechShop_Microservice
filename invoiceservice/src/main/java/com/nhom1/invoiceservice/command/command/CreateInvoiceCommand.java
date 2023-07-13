@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateInvoiceCommand {
-    @TargetAggregateIdentifier
-    private int invoiceID;
-    private int userID;
-    private int totalCost;
+	@TargetAggregateIdentifier
+	private int invoiceID;
+	private int userID;
+	private int totalCost;
 	private String invoiceDate;
 	private String shippingDate;
 	private String note;
 	private boolean otherShippingAddress;
-	private String statusInvoice= "PENDING";
-	private String userInvoiceIndex;    
+	private String statusInvoice = "PENDING";
+	private String userInvoiceIndex;
 }

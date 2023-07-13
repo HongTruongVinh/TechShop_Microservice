@@ -31,6 +31,10 @@ spring:
         - id: productservice
           uri: http://localhost:9001
           predicates: 
+            - Path=/**
+        - id: productservice
+          uri: http://localhost:9001
+          predicates: 
             - Path=/images/**
             
         - id: invoiceservice
