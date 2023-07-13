@@ -10,36 +10,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SaleProduct")
+@Table(name = "saleproduct")
 public class SaleProduct {
 	@Id
-	private String id;
+	private String _id;
 	private Date startSele;
 	private Date endSele;
-	private Integer IntproductPrice;
+	private Integer productPrice;
 	private short isDelete;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "product_id", insertable=false, updatable=false)
-	private Product product;
-	
 	public String getId() {
-		return id;
+		return _id;
 	}
 	public void setId(String id) {
-		this.id = id;
+		this._id = id;
 	}
 	public Date getEndSele() {
 		return endSele;
 	}
 	public void setEndSele(Date endSele) {
 		this.endSele = endSele;
-	}
-	public Integer getIntproductPrice() {
-		return IntproductPrice;
-	}
-	public void setIntproductPrice(Integer intproductPrice) {
-		IntproductPrice = intproductPrice;
 	}
 	public short getIsDelete() {
 		return isDelete;
@@ -54,11 +44,11 @@ public class SaleProduct {
 	public void setStartSele(Date startSele) {
 		this.startSele = startSele;
 	}
-	
-	public Product getProduct() {
-		return product;
+
+	public Integer getProductPrice() {
+		return productPrice;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductPrice(Integer productPrice) {
+		this.productPrice = productPrice;
 	}
 }

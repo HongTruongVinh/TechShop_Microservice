@@ -16,6 +16,11 @@ import com.nhom1.productservice.query.queries.GetBrandQuery;
 import com.nhom1.productservice.query.queries.GetCategoriesQuery;
 import com.nhom1.productservice.query.queries.GetPriceProductByIdQuery;
 import com.nhom1.productservice.query.queries.GetProductQuery;
+import com.nhom1.productservice.query.queries.GetProductsByCategory;
+import com.nhom1.productservice.query.queries.GetRelatedBrandProductsQuery;
+import com.nhom1.productservice.query.queries.GetRelatedCategoryProductsQuery;
+import com.nhom1.productservice.query.queries.GetTopPurchasedByCategoryIdQuery;
+import com.nhom1.productservice.query.queries.GetTrendingProductsQuery;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -24,19 +29,8 @@ public class ProductQueryController {
 	@Autowired
 	private QueryGateway queryGateway;
 	
-	@GetMapping("/{id}")
-	public ProductResponseModel getProductDetail(@PathVariable String id) {
-		GetProductQuery getProductQuery = new GetProductQuery();
-		getProductQuery.setId(id);
-		
-		ProductResponseModel ProductResponseModel = queryGateway.query(getProductQuery, 
-				ResponseTypes.instanceOf(ProductResponseModel.class)).join();
-		
-		return ProductResponseModel;
-	}
-	
-	@GetMapping()
-	public List<ProductResponseModel> getAllProductDetail() {
+	@GetMapping("")
+	public List<ProductResponseModel> getAllProduct() {
 		GetAllProductQuery getAllProductQuery = new GetAllProductQuery();
 
 
@@ -45,6 +39,75 @@ public class ProductQueryController {
 		
 		return list;
 	}
+	
+	@GetMapping("/{productID}")
+	public ProductResponseModel getDetailedProduct(@PathVariable String productID) {
+		GetProductQuery getProductQuery = new GetProductQuery();
+		getProductQuery.setId(productID);
+		
+		ProductResponseModel ProductResponseModel = queryGateway.query(getProductQuery, 
+				ResponseTypes.instanceOf(ProductResponseModel.class)).join();
+		
+		return ProductResponseModel;
+	}
+	
+	@GetMapping("/category/{categorySlug}")
+	public List<ProductResponseModel> getProductsByCategory(@PathVariable String categorySlug) {
+		GetProductsByCategory query = new GetProductsByCategory();
+		query.setCategorySlug(categorySlug);
+		
+		List<ProductResponseModel> list = queryGateway.query(query, 
+				ResponseTypes.multipleInstancesOf(ProductResponseModel.class)).join();
+		
+		return list;
+	}
+	
+	@GetMapping("/toppurchased/{categoryID}")
+	public List<ProductResponseModel> GetTopPurchasedByCategoryId(@PathVariable String categoryID) {
+		GetTopPurchasedByCategoryIdQuery query = new GetTopPurchasedByCategoryIdQuery();
+		query.setId(categoryID);
+
+		List<ProductResponseModel> list = queryGateway.query(query, 
+				ResponseTypes.multipleInstancesOf(ProductResponseModel.class)).join();
+		
+		return list;
+	}
+
+	@GetMapping("/trending")
+	public List<ProductResponseModel> getTrendingProducts() {
+		GetTrendingProductsQuery getTrendingProductsQuery = new GetTrendingProductsQuery();
+
+		List<ProductResponseModel> list = queryGateway.query(getTrendingProductsQuery, 
+				ResponseTypes.multipleInstancesOf(ProductResponseModel.class)).join();
+		
+		return list;
+	}
+	
+	@GetMapping("related-category/{productID}")
+	public List<ProductResponseModel> getRelatedCategoryProducts(@PathVariable String productID) {
+		GetRelatedCategoryProductsQuery query = new GetRelatedCategoryProductsQuery();
+		query.setProductID(productID);
+		
+		List<ProductResponseModel> list = queryGateway.query(query, 
+				ResponseTypes.multipleInstancesOf(ProductResponseModel.class)).join();
+		
+		return list;
+	}
+	
+	@GetMapping("related-brand/{productID}")
+	public List<ProductResponseModel> getRelatedBrandProducts(@PathVariable String productID) {
+		GetRelatedBrandProductsQuery query = new GetRelatedBrandProductsQuery();
+		query.setProductID(productID);
+		
+		List<ProductResponseModel> list = queryGateway.query(query, 
+				ResponseTypes.multipleInstancesOf(ProductResponseModel.class)).join();
+		
+		return list;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	
 	
 	@GetMapping("IdBrand/{IdBrand}")
 	public List<ProductResponseModel> getProductsByBrandId(@PathVariable String IdBrand) {
@@ -78,4 +141,5 @@ public class ProductQueryController {
 		
 		return price;
 	}
+	
 }

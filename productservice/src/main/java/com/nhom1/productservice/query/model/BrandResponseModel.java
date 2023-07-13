@@ -2,55 +2,41 @@ package com.nhom1.productservice.query.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.nhom1.productservice.command.data.Product;
-
-
-@JsonIgnoreProperties(value= {"products"})
 public class BrandResponseModel {
-	private String id;
-	private String name;
-	private String image;
-	private short isDelete;
-	private List<Product> products;
+	private String _id;
+	private String brandName;
+	private String brandImg;
+	private short isDeleted;
 
-	public String getId() {
-		return id;
+	public String get_id() {
+		return _id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void set_id(String _id) {
+		this._id = _id;
 	}
 
-	public String getName() {
-		return name;
+	public String getBrandName() {
+		return brandName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
-	public String getImage() {
-		return image;
+	public String getBrandImg() {
+		return brandImg;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setBrandImg(String brandImg) {
+		this.brandImg = brandImg;
 	}
 
-	public short getIsDelete() {
-		return isDelete;
+	public short getIsDeleted() {
+		return isDeleted;
 	}
 
-	public void setIsDelete(short isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setIsDeleted(short isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

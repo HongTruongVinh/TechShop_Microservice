@@ -30,7 +30,7 @@ public class BrandProjection {
 	
 	@QueryHandler
 	public List<BrandResponseModel> handle(GetAllBrandQuery getAllBrandQuery){
-		List<Brand> listEntity = brandRepository.findAll();
+		List<Brand> listEntity = brandRepository.findAllBrand();
 		List<BrandResponseModel> listBrand = new ArrayList<>();
 		
 		listEntity.forEach(s -> {

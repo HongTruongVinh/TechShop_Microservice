@@ -31,7 +31,7 @@ public class BrandQueryController {
 		return BrandResponseModel;
 	}
 	
-	@GetMapping()
+	@GetMapping("")
 	public List<BrandResponseModel> getAllBrandDetail() {
 		GetAllBrandQuery getAllBrandQuery = new GetAllBrandQuery();
 

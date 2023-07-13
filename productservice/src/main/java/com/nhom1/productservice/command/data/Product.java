@@ -6,72 +6,85 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product {
 	@Id
-	private String id;
-	private String name;
-	private float rate;
-	private Integer price;
+	private String _id;
+	private String categoryID;
+	private String brandID;
+	private String productName;
+	private String productRate;
+	private String productPrice;
+	@Lob 
 	private String shortDescrip;
+	@Lob 
 	private String longDescrip;
-	private String tech;
-	private Integer stock;
-	private Integer warranty;
-	private Integer purchased;
+	@Lob 
+	private String shortTech;
+	private String stock;
+	private String warranty;
+	private String purchased;
+	@Lob 
 	private String specs;
-	private short isSale;
-	private Integer totalReviews;
-	private Integer images;
-	private short isDelete;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "category_id", insertable=false, updatable=false)
-	private Category category;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "brand_id", insertable=false, updatable=false)
-	private Brand brand;
-	
-	@OneToMany(mappedBy = "id")
-	private List<SaleProduct> saleProducts;
+	private String isSale;
+	private String totalReviews;
+	@Lob 
+	private String images;
+	private String isDeleted;
 	
 
 	public String getId() {
-		return id;
+		return _id;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this._id = id;
+	}
+	
+	public String getCategoryID() {
+		return categoryID;
+	}
+
+	public void setCategoryID(String categoryID) {
+		this.categoryID = categoryID;
+	}
+
+	public String getBrandID() {
+		return brandID;
+	}
+
+	public void setBrandID(String brandID) {
+		this.brandID = brandID;
 	}
 
 	public String getName() {
-		return name;
+		return productName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.productName = name;
 	}
 
 	public float getRate() {
-		return rate;
+		return Float.parseFloat(this.productRate);
 	}
 
 	public void setRate(float rate) {
-		this.rate = rate;
+		this.productRate = String.valueOf(rate);
 	}
 
 	public Integer getPrice() {
-		return price;
+		return  Integer.parseInt(productPrice);
 	}
 
 	public void setPrice(Integer price) {
-		this.price = price;
+		this.productPrice = String.valueOf(price);
 	}
 
 	public String getShortDescrip() {
@@ -91,35 +104,35 @@ public class Product {
 	}
 
 	public String getTech() {
-		return tech;
+		return shortTech;
 	}
 
 	public void setTech(String tech) {
-		this.tech = tech;
+		this.shortTech = tech;
 	}
 
 	public Integer getStock() {
-		return stock;
+		return Integer.parseInt(stock);
 	}
 
 	public void setStock(Integer stock) {
-		this.stock = stock;
+		this.stock = String.valueOf(stock);
 	}
 
 	public Integer getWarranty() {
-		return warranty;
+		return  Integer.parseInt(warranty);
 	}
 
 	public void setWarranty(Integer warranty) {
-		this.warranty = warranty;
+		this.warranty =  String.valueOf(warranty);
 	}
 
 	public Integer getPurchased() {
-		return purchased;
+		return  Integer.parseInt(purchased);
 	}
 
 	public void setPurchased(Integer purchased) {
-		this.purchased = purchased;
+		this.purchased = String.valueOf(purchased);
 	}
 
 	public String getSpecs() {
@@ -131,60 +144,61 @@ public class Product {
 	}
 
 	public short getIsSale() {
-		return isSale;
+		Short _isSale = 0;
+		
+		if(isSale == "1") {
+			_isSale = 1;
+		}
+		return _isSale;
 	}
 
-	public void setIsSale(short isSale) {
-		this.isSale = isSale;
+	public void setIsSale(short _isSale) {
+
+		if(_isSale == 0) {
+			this.isSale = "0";
+		}
+		else {
+			this.isSale = "1";
+		}
 	}
 
 	public Integer getTotalReviews() {
-		return totalReviews;
+		return Integer.parseInt(totalReviews);
 	}
 
 	public void setTotalReviews(Integer totalReviews) {
-		this.totalReviews = totalReviews;
+		this.totalReviews = String.valueOf(totalReviews);
 	}
 
-	public Integer getImages() {
+	public String getImages() {
 		return images;
 	}
 
-	public void setImages(Integer images) {
+	public void setImages(String images) {
 		this.images = images;
 	}
 
 	public short getIsDelete() {
-		return isDelete;
+		Short _isDeleted = 0;
+		
+		if(isDeleted == "1") {
+			_isDeleted = 1;
+		}
+		
+		return _isDeleted;
 	}
 
-	public void setIsDelete(short isDelete) {
-		this.isDelete = isDelete;
+	public void setIsDelete(short _isDeleted) {
+		
+		if(_isDeleted == 0) {
+			this.isDeleted = "0";
+		}
+		else {
+			this.isDeleted = "1";
+		}
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public List<SaleProduct> getSaleProducts() {
-		return saleProducts;
-	}
-
-	public void setSaleProducts(List<SaleProduct> saleProducts) {
-		this.saleProducts = saleProducts;
-	}
+	
 
 
 }

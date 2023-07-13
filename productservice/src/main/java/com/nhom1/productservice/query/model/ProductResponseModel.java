@@ -9,161 +9,112 @@ import com.nhom1.productservice.command.data.SaleProduct;
 
 @JsonIgnoreProperties(value= {"saleProducts", "category", "brand"})
 public class ProductResponseModel {
-	private String id;
-	private String name;
-	private float rate;
-	private Integer price;
+	private String productID;
+	private String categoryName;
+	private String brandName;
+	private float productRate;
+	private String productName;
+	private Integer productPrice;
 	private String shortDescrip;
 	private String longDescrip;
-	private String tech;
+	private String shortTech;
 	private Integer stock;
 	private Integer warranty;
 	private Integer purchased;
 	private String specs;
-	private short isSale;
-	private Integer totalReviews;
-	private Integer images;
-	private short isDelete;
+	private String categorySlug;
+	private String images;
 	
-	
-	private Category category;
-	
-	private Brand brand;
-	
-	private List<SaleProduct> saleProducts;
-	
-
-	public String getId() {
-		return id;
+	public String getProductID() {
+		return productID;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setProductID(String productID) {
+		this.productID = productID;
 	}
-
-	public String getName() {
-		return name;
+	public String getCategoryName() {
+		return categoryName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-
-	public float getRate() {
-		return rate;
+	public String getBrandName() {
+		return brandName;
 	}
-
-	public void setRate(float rate) {
-		this.rate = rate;
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
-
-	public Integer getPrice() {
-		return price;
+	public float getProductRate() {
+		return productRate;
 	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
+	public void setProductRate(Float productRate) {
+		this.productRate = productRate;
 	}
-
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public Integer getProductPrice() {
+		return productPrice;
+	}
+	public void setProductPrice(Integer productPrice) {
+		this.productPrice = productPrice;
+	}
 	public String getShortDescrip() {
 		return shortDescrip;
 	}
-
 	public void setShortDescrip(String shortDescrip) {
 		this.shortDescrip = shortDescrip;
 	}
-
 	public String getLongDescrip() {
 		return longDescrip;
 	}
-
 	public void setLongDescrip(String longDescrip) {
 		this.longDescrip = longDescrip;
 	}
-
-	public String getTech() {
-		return tech;
+	public String getShortTech() {
+		return shortTech;
 	}
-
-	public void setTech(String tech) {
-		this.tech = tech;
+	public void setShortTech(String shortTech) {
+		this.shortTech = shortTech;
 	}
-
 	public Integer getStock() {
 		return stock;
 	}
-
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-
 	public Integer getWarranty() {
 		return warranty;
 	}
-
 	public void setWarranty(Integer warranty) {
 		this.warranty = warranty;
 	}
-
 	public Integer getPurchased() {
 		return purchased;
 	}
-
 	public void setPurchased(Integer purchased) {
 		this.purchased = purchased;
 	}
-
 	public String getSpecs() {
 		return specs;
 	}
-
 	public void setSpecs(String specs) {
 		this.specs = specs;
 	}
-
-	public short getIsSale() {
-		return isSale;
+	public String getCategorySlug() {
+		return categorySlug;
 	}
-
-	public void setIsSale(short isSale) {
-		this.isSale = isSale;
+	public void setCategorySlug(String categorySlug) {
+		this.categorySlug = categorySlug;
 	}
-
-	public Integer getTotalReviews() {
-		return totalReviews;
-	}
-
-	public void setTotalReviews(Integer totalReviews) {
-		this.totalReviews = totalReviews;
-	}
-
-	public Integer getImages() {
+	public String getImages() {
 		return images;
 	}
-
-	public void setImages(Integer images) {
+	public void setImages(String images) {
 		this.images = images;
 	}
-
-	public short getIsDelete() {
-		return isDelete;
-	}
-
-	public void setIsDelete(short isDelete) {
-		this.isDelete = isDelete;
-	}
-	/*
-	 * public Category getCategory() { return category; }
-	 * 
-	 * public void setCategory(Category category) { this.category = category; }
-	 * 
-	 * public Brand getBrand() { return brand; }
-	 * 
-	 * public void setBrand(Brand brand) { this.brand = brand; }
-	 * 
-	 * public List<SaleProduct> getSaleProducts() { return saleProducts; }
-	 * 
-	 * public void setSaleProducts(List<SaleProduct> saleProducts) {
-	 * this.saleProducts = saleProducts; }
-	 */
+	
+	
 }

@@ -8,65 +8,54 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Category")//categories
+@Table(name = "category")//categories
 public class Category {
 	@Id
-	private String id;
-	private String name;
-	private String slug;
-	private short exact;
-	private short isDelete;
+	private String _id;
+	private String categoryName;
+	private String categorySlug;
+	private short categoryExact;
+	private short isDeleted;
 
-	@OneToMany(mappedBy = "id")
-	private List<Product> products;
 	
 	public String getId() {
-		return id;
+		return _id;
 	}
 	
 	public void setId(String id) {
-		this.id = id;
+		this._id = id;
 	}
 
 	public String getName() {
-		return name;
+		return categoryName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.categoryName = name;
 	}
 
 	public String getSlug() {
-		return slug;
+		return categorySlug;
 	}
 
 	public void setSlug(String slug) {
-		this.slug = slug;
+		this.categorySlug = slug;
 	}
 
 	public short getExact() {
-		return exact;
+		return categoryExact;
 	}
 
 	public void setExact(short exact) {
-		this.exact = exact;
+		this.categoryExact = exact;
 	}
 
 	public short getIsDelete() {
-		return isDelete;
+		return isDeleted;
 	}
 
 	public void setIsDelete(short isDelete) {
-		this.isDelete = isDelete;
+		this.isDeleted = isDelete;
 	}
 	
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
 }

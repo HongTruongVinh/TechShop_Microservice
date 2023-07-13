@@ -15,7 +15,7 @@ import com.nhom1.productservice.query.queries.GetAllCategoryQuery;
 import com.nhom1.productservice.query.queries.GetCategoriesQuery;
 
 @RestController
-@RequestMapping("/api/v1/categories")
+@RequestMapping("/api/v1/category")
 public class CategoryQueryController {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class CategoryQueryController {
 		return categoryResponseModel;
 	}
 	
-	@GetMapping()
+	@GetMapping("")
 	public List<CategoryResponseModel> getAllCategoryDetail() {
 		GetAllCategoryQuery getAllCategoryQuery = new GetAllCategoryQuery();
 

@@ -26,19 +26,18 @@ public class CategoryProjection {
 	public CategoryResponseModel handle(GetCategoriesQuery getCategoriesQuery) {
 		CategoryResponseModel model = new CategoryResponseModel();
 		Category category = categoryRepository.getById(getCategoriesQuery.getId());
-		BeanUtils.copyProperties(category, model);
+		model = setCategoryResponseModel(category);
 		
 		return model;
 	}
 	
 	@QueryHandler
 	public List<CategoryResponseModel> handle(GetAllCategoryQuery getAllCategoryQuery){
-		List<Category> listEntity = categoryRepository.findAll();
+		List<Category> listEntity = categoryRepository.findAllCategory();
 		List<CategoryResponseModel> listCategory = new ArrayList<>();
 		
 		listEntity.forEach(s -> {
-			CategoryResponseModel model = new CategoryResponseModel();
-			BeanUtils.copyProperties(s, model);
+			CategoryResponseModel model = setCategoryResponseModel(s);
 			listCategory.add(model);
 		});
 		return listCategory;
@@ -59,6 +58,23 @@ public class CategoryProjection {
 		System.out.println("run getListCtaegory in ProductService:________ count of list " + listCategory.size());
 		
 		return listCategory;
+	}
+	
+	public CategoryResponseModel setCategoryResponseModel(Category entity) {
+		CategoryResponseModel model = new CategoryResponseModel();
+		
+		model.setCategoryID(entity.getId());
+		model.setCategoryName(entity.getName());
+		model.setCategorySlug(entity.getSlug());
+		
+		if(entity.getExact() == 1) {
+			model.setCategoryExact(true);
+		}
+		else {
+			model.setCategoryExact(false);
+		}
+		
+		return model;
 	}
 	
 }

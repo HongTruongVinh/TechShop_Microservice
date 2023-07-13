@@ -7,58 +7,33 @@ import com.nhom1.productservice.command.data.Product;
 
 @JsonIgnoreProperties(value= {"products"})
 public class CategoryResponseModel {
-	private String id;
-	private String name;
-	private String slug;
-	private short exact;
-	private short isDelete;
-	private List<Product> products;
+	private String categoryID;
+	private String categoryName;
+	private String categorySlug;
+	private Boolean categoryExact;
 	
-	public String getId() {
-		return id;
+	public String getCategoryID() {
+		return categoryID;
 	}
-	
-	public void setId(String id) {
-		this.id = id;
+	public void setCategoryID(String categoryID) {
+		this.categoryID = categoryID;
 	}
-
-	public String getName() {
-		return name;
+	public String getCategoryName() {
+		return categoryName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-
-	public String getSlug() {
-		return slug;
+	public String getCategorySlug() {
+		return categorySlug;
 	}
-
-	public void setSlug(String slug) {
-		this.slug = slug;
+	public void setCategorySlug(String categorySlug) {
+		this.categorySlug = categorySlug;
 	}
-
-	public short getExact() {
-		return exact;
+	public Boolean getCategoryExact() {
+		return categoryExact;
 	}
-
-	public void setExact(short exact) {
-		this.exact = exact;
-	}
-
-	public short getIsDelete() {
-		return isDelete;
-	}
-
-	public void setIsDelete(short isDelete) {
-		this.isDelete = isDelete;
-	}
-	
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setCategoryExact(Boolean categoryExact) {
+		this.categoryExact = categoryExact;
 	}
 }

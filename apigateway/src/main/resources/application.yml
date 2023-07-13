@@ -12,6 +12,27 @@ spring:
           uri: http://localhost:9001
           predicates: 
             - Path=/api/v1/product/**
+        - id: productservice
+          uri: http://localhost:9001
+          predicates: 
+            - Path=/api/v1/brand/**
+        - id: productservice
+          uri: http://localhost:9001
+          predicates: 
+            - Path=/api/v1/category/**
+        - id: productservice
+          uri: http://localhost:9001
+          predicates: 
+            - Path=/api/v1/review/**
+        - id: productservice
+          uri: http://localhost:9001
+          predicates: 
+            - Path=/api/v1/saleproduct/**
+        - id: productservice
+          uri: http://localhost:9001
+          predicates: 
+            - Path=/images/**
+            
         - id: invoiceservice
           uri: http://localhost:9002
           predicates: 

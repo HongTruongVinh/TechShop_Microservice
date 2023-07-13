@@ -22,6 +22,11 @@ import com.nhom1.productservice.query.queries.GetBrandQuery;
 import com.nhom1.productservice.query.queries.GetCategoriesQuery;
 import com.nhom1.productservice.query.queries.GetPriceProductByIdQuery;
 import com.nhom1.productservice.query.queries.GetProductQuery;
+import com.nhom1.productservice.query.queries.GetProductsByCategory;
+import com.nhom1.productservice.query.queries.GetRelatedBrandProductsQuery;
+import com.nhom1.productservice.query.queries.GetRelatedCategoryProductsQuery;
+import com.nhom1.productservice.query.queries.GetTopPurchasedByCategoryIdQuery;
+import com.nhom1.productservice.query.queries.GetTrendingProductsQuery;
 
 @Component
 public class ProductProjection {
@@ -32,77 +37,178 @@ public class ProductProjection {
 	private BrandRepository brandRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@QueryHandler
 	public ProductResponseModel handle(GetProductQuery getProductQuery) {
-		ProductResponseModel model = new ProductResponseModel();
 		Product entity = productRepository.getById(getProductQuery.getId());
-		BeanUtils.copyProperties(entity, model);
 		
+		ProductResponseModel model = setResponseModel(entity);
+
 		return model;
 	}
-	
+
 	@QueryHandler
-	public List<ProductResponseModel> handle(GetAllProductQuery getAllProductQuery){
+	public List<ProductResponseModel> handle(GetAllProductQuery getAllProductQuery) {
 		List<Product> listEntity = productRepository.findAll();
 		List<ProductResponseModel> listProduct = new ArrayList<>();
-		
+
 		listEntity.forEach(s -> {
-			ProductResponseModel model = new ProductResponseModel();
-			BeanUtils.copyProperties(s, model);
+			ProductResponseModel model = setResponseModel(s);
 			listProduct.add(model);
 		});
 		return listProduct;
 	}
-	
 
 	@QueryHandler
-	public List<ProductResponseModel> handle(GetBrandQuery query){
-		
+	public List<ProductResponseModel> handle(GetBrandQuery query) {
+
 		Brand entity = brandRepository.getById(query.getId());
-		
+
 		BrandResponseModel brandModel = new BrandResponseModel();
 		BeanUtils.copyProperties(entity, brandModel);
-		
+
 		List<ProductResponseModel> list = new ArrayList<>();
-		
-		List<Product> listProductEntity =  productRepository.getProductsByBrandId(brandModel.getId());
-		
+
+		List<Product> listProductEntity = productRepository.getProductsByBrandId(brandModel.get_id());
+
 		listProductEntity.forEach(s -> {
-			ProductResponseModel model = new ProductResponseModel();
-			BeanUtils.copyProperties(s, model);
+			ProductResponseModel model = setResponseModel(s);
 			list.add(model);
 		});
-		
+
 		return list;
 	}
-	
+
 	@QueryHandler
-	public List<ProductResponseModel> handle(GetCategoriesQuery query){
-		
+	public List<ProductResponseModel> handle(GetCategoriesQuery query) {
+
 		Category entity = categoryRepository.getById(query.getId());
-		
+
 		CategoryResponseModel categoryModle = new CategoryResponseModel();
 		BeanUtils.copyProperties(entity, categoryModle);
-		
+
 		List<ProductResponseModel> list = new ArrayList<>();
-		
-		List<Product> listProductEntity =  productRepository.getProductsByCategoryId(categoryModle.getId());
-		
+
+		List<Product> listProductEntity = productRepository.getProductsByCategoryId(categoryModle.getCategoryID());
+
 		listProductEntity.forEach(s -> {
-			ProductResponseModel model = new ProductResponseModel();
-			BeanUtils.copyProperties(s, model);
+			ProductResponseModel model = setResponseModel(s);
 			list.add(model);
 		});
-		
+
 		return list;
+	}
+
+	@QueryHandler
+	public Integer handle(GetPriceProductByIdQuery query) {
+
+		Integer price = productRepository.findProductPriceByProductID(query.getId());
+
+		return price;
+	}
+
+	@QueryHandler
+	public List<ProductResponseModel> handle(GetTrendingProductsQuery getTrendingProductsQuery) {
+		List<Product> listEntity = productRepository.findTrendingProducts();
+		List<ProductResponseModel> listProduct = new ArrayList<>();
+
+		listEntity.forEach(s -> {
+			try {
+				ProductResponseModel model = setResponseModel(s);
+				listProduct.add(model);
+			} catch (Exception e) {
+				System.out.println("productID = " + s.getId() + "  ;  categoryID = " + s.getCategoryID());
+
+			}
+		});
+		return listProduct;
+	}
+
+	@QueryHandler
+	public List<ProductResponseModel> handle(GetTopPurchasedByCategoryIdQuery query) {
+		List<Product> listEntity = productRepository.findTopPurchasedByCategoryId(query.getId());
+
+		List<ProductResponseModel> listProduct = new ArrayList<>();
+		listEntity.forEach(s -> {
+			ProductResponseModel model = setResponseModel(s);
+			listProduct.add(model);
+		});
+
+		return listProduct;
 	}
 	
 	@QueryHandler
-	public Integer handle(GetPriceProductByIdQuery query) {
+	public List<ProductResponseModel> handle(GetProductsByCategory query) {
+		List<Product> listEntity = productRepository.findByCategorySlug(query.getCategorySlug());
+
+		List<ProductResponseModel> listProduct = new ArrayList<>();
+		listEntity.forEach(s -> {
+			ProductResponseModel model = setResponseModel(s);
+			listProduct.add(model);
+		});
+
+		return listProduct;
+	}
+	
+	@QueryHandler
+	public List<ProductResponseModel> handle(GetRelatedCategoryProductsQuery query) {
+		List<Product> listEntity = productRepository.findRelatedProductsByCategory(query.getProductID());
+
+		List<ProductResponseModel> listProduct = new ArrayList<>();
+		listEntity.forEach(s -> {
+			ProductResponseModel model = setResponseModel(s);
+			listProduct.add(model);
+		});
+
+		return listProduct;
+	}
+	
+	@QueryHandler
+	public List<ProductResponseModel> handle(GetRelatedBrandProductsQuery query) {
+		List<Product> listEntity = productRepository.findRelatedProductsByBrand(query.getProductID());
+
+		List<ProductResponseModel> listProduct = new ArrayList<>();
+		listEntity.forEach(s -> {
+			ProductResponseModel model = setResponseModel(s);
+			listProduct.add(model);
+		});
+
+		return listProduct;
+	}
+	
+	
+	
+
+	public ProductResponseModel setResponseModel(Product s) {
+		ProductResponseModel model = new ProductResponseModel();
 		
-		Integer price = productRepository.findProductPriceByProductID(query.getId());
+		Category category = categoryRepository.findCategoryById(s.getCategoryID());
+
+		Brand brand = brandRepository.findBrandById(s.getCategoryID());
+
+		if (category != null) {
+			model.setCategoryName(category.getName());
+			model.setCategorySlug(category.getSlug());
+		}
 		
-		return price;
+		if (brand != null) {
+			model.setBrandName(brand.getBrandName());
+		}
+
+		
+		model.setProductID(s.getId());
+		model.setProductName(s.getName());
+		model.setProductPrice(s.getPrice());
+		model.setProductRate(s.getRate());
+		model.setPurchased(s.getPurchased());
+		model.setShortDescrip(s.getShortDescrip());
+		model.setShortTech(s.getTech());
+		model.setSpecs(s.getSpecs());
+		model.setStock(s.getStock());
+		model.setWarranty(s.getWarranty());
+		model.setImages(s.getImages());
+		model.setLongDescrip(s.getLongDescrip());
+
+		return model;
 	}
 }
