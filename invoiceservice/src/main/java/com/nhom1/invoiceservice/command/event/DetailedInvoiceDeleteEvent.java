@@ -9,4 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DetailedInvoiceDeleteEvent {
     private int detailedInvoiceID;
+
+	public int getDetailedInvoiceID() {
+		return detailedInvoiceID;
+	}
+
+	public void setDetailedInvoiceID(int detailedInvoiceID) {
+		this.detailedInvoiceID = detailedInvoiceID;
+	}
+    
 }

@@ -19,7 +19,7 @@ public class DetailedInvoiceEventsHandler {
     }
     @EventHandler
     public void on(DetailedInvoiceUpdateEvent event) {
-        DetailedInvoice detailedInvoice = detailedInvoiceRepository.getById(event.getDetailedInvoiceID());
+        DetailedInvoice detailedInvoice = detailedInvoiceRepository.findDetailedInvoicceById(event.getDetailedInvoiceID());
         detailedInvoice.setInvoiceID(event.getInvoiceID());
         detailedInvoice.setProductID(event.getProductID());
         detailedInvoice.setQuantity(event.getQuantity());

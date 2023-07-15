@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "1",
+    "userID": "2",
+    "totalCost": 15000,
+    "invoiceDate": "2023-07-12T12:00:17.074063800",
+    "shippingDate": "2023-07-15T12:00:17.074063800",
+    "otherShippingAddress": false,
+    "statusInvoice": "PENDING",
+    "userInvoiceIndex": "linh@gmail.com0"
+  },
+  {
+    "_id": "2",
+    "userID": "2",
+    "totalCost": 23000,
+    "invoiceDate": "2023-07-12",
+    "shippingDate": "2023-07-15",
+    "otherShippingAddress": false,
+    "statusInvoice": "PENDING",
+    "userInvoiceIndex": "linh@gmail.com0"
+  },
+  {
+    "_id": "3",
+    "userID": "2",
+    "totalCost": 4000,
+    "invoiceDate": "2023-07-12T21:00:19.337921300",
+    "shippingDate": "2023-07-15T21:00:19.337921300",
+    "otherShippingAddress": false,
+    "statusInvoice": "PENDING",
+    "userInvoiceIndex": "linh@gmail.com0"
+  }
+]

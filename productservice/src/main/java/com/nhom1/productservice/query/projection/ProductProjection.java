@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nhom1.commonservice.model.ProductResponseCommonModel;
+import com.nhom1.commonservice.query.GetProductCommonQuery;
 import com.nhom1.productservice.command.data.Brand;
 import com.nhom1.productservice.command.data.BrandRepository;
 import com.nhom1.productservice.command.data.Category;
@@ -47,6 +49,41 @@ public class ProductProjection {
 		Product entity = productRepository.getById(getProductQuery.getId());
 
 		ProductResponseModel model = setResponseModel(entity);
+
+		return model;
+	}
+	
+	@QueryHandler
+	public ProductResponseCommonModel handle(GetProductCommonQuery getProductQuery) {
+		Product s = productRepository.getById(getProductQuery.getProductID());
+
+		ProductResponseCommonModel model = new ProductResponseCommonModel();
+
+		Category category = categoryRepository.findCategoryById(s.getCategoryID());
+
+		Brand brand = brandRepository.findBrandById(s.getCategoryID());
+
+		if (category != null) {
+			model.setCategoryName(category.getName());
+			model.setCategorySlug(category.getSlug());
+		}
+
+		if (brand != null) {
+			model.setBrandName(brand.getBrandName());
+		}
+
+		model.setProductID(s.getId());
+		model.setProductName(s.getName());
+		model.setProductPrice(s.getPrice());
+		model.setProductRate(s.getRate());
+		model.setPurchased(s.getPurchased());
+		model.setShortDescrip(s.getShortDescrip());
+		model.setShortTech(s.getTech());
+		model.setSpecs(s.getSpecs());
+		model.setStock(s.getStock());
+		model.setWarranty(s.getWarranty());
+		model.setImages(s.getImages());
+		model.setLongDescrip(s.getLongDescrip());
 
 		return model;
 	}

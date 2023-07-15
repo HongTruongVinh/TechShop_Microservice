@@ -9,4 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InvoiceDeleteEvent {
     private int invoiceID;
+
+	public int getInvoiceID() {
+		return invoiceID;
+	}
+
+	public void setInvoiceID(int invoiceID) {
+		this.invoiceID = invoiceID;
+	}
+    
 }

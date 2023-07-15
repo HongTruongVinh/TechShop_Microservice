@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nhom1.commonservice.model.CategoryResponseCommonModel;
-import com.nhom1.commonservice.query.GetListCategoryQuery;
 import com.nhom1.userservice.query.model.UserResponseModel;
 import com.nhom1.userservice.query.queries.GetAllUserQuery;
 import com.nhom1.userservice.query.queries.GetUserByIdQuery;
+
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -44,12 +47,15 @@ public class UserQueryController {
 		return list;
 	}
 	
-	@GetMapping("/categoryTest") 
-	public List<CategoryResponseCommonModel> getCategory(){
-		GetListCategoryQuery getListCategoryQuery = new GetListCategoryQuery();
-		System.out.println("get category from userservice");
-		List<CategoryResponseCommonModel> listCategory  = queryGateway.query(getListCategoryQuery, 
-				ResponseTypes.multipleInstancesOf(CategoryResponseCommonModel.class)) .join();
-		return listCategory; 
+	@GetMapping("/usersession") 
+	public User getUserSession(){
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User userDetails = (User)auth.getPrincipal();
+			return userDetails;
+			
+		} catch (Exception e) {
+			return null;
+		} 
 	}
 }

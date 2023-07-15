@@ -1,0 +1,21 @@
+[{
+  "_id": "1",
+  "invoiceID": "1",
+  "fullname": "Đinh Ngọc UP",
+  "phone": "0904588091",
+  "address": "39/4/37 Huynh Van Banh"
+},
+{
+  "_id": "2",
+  "invoiceID": "2",
+  "fullname": "Đinh Ngọc UP",
+  "phone": "0904588091",
+  "address": "39/4/37 Huynh Van Banh"
+},
+{
+  "_id": "3",
+  "invoiceID": "3",
+  "fullname": "Đinh Ngọc UP",
+  "phone": "0904588091",
+  "address": "39/4/37 Huynh Van Banh"
+}]

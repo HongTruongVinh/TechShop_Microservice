@@ -13,9 +13,8 @@ import com.nhom1.invoiceservice.command.event.InvoiceCreateEvent;
 @Aggregate
 public class InvoiceAggergate {
 	@AggregateIdentifier
-	private int invoiceID;
-	
-	private int userID;
+	private String invoiceID;
+	private String userID;
 	private int totalCost;
 	private String invoiceDate;
 	private String shippingDate;

@@ -1,6 +1,5 @@
 package com.nhom1.productservice.query.model;
 
-import java.util.List;
 
 public class BrandResponseModel {
 	private String _id;

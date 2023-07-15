@@ -12,7 +12,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DeleteDetailedInvoiceCommand {
     @TargetAggregateIdentifier
-    private int detailedInvoiceID;
+    private String detailedInvoiceID;
+    
+	public DeleteDetailedInvoiceCommand(String detailedInvoiceID) {
+		super();
+		this.detailedInvoiceID = detailedInvoiceID;
+	}
+
+	public String getDetailedInvoiceID() {
+		return detailedInvoiceID;
+	}
+
+	public void setDetailedInvoiceID(String detailedInvoiceID) {
+		this.detailedInvoiceID = detailedInvoiceID;
+	}
     
     
 }

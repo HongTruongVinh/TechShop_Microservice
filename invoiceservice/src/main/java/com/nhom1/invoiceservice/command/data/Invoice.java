@@ -1,26 +1,15 @@
 package com.nhom1.invoiceservice.command.data;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "INVOICE")
+@Table(name = "invoice")
 public class Invoice {
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int invoiceID;
-	private int userID;
+	private String _id;
+	private String userID;
 	private int totalCost;
 	private String invoiceDate;
 	private String shippingDate;
@@ -28,16 +17,17 @@ public class Invoice {
 	private boolean otherShippingAddress;
 	private String statusInvoice= "PENDING";
 	private String userInvoiceIndex;
-	public int getInvoiceID() {
-		return invoiceID;
+	
+	public String get_id() {
+		return _id;
 	}
-	public void setInvoiceID(int invoiceID) {
-		this.invoiceID = invoiceID;
+	public void set_id(String _id) {
+		this._id = _id;
 	}
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 	public int getTotalCost() {
@@ -82,4 +72,5 @@ public class Invoice {
 	public void setUserInvoiceIndex(String userInvoiceIndex) {
 		this.userInvoiceIndex = userInvoiceIndex;
 	}
+	
 }

@@ -3,6 +3,7 @@ package com.nhom1.productservice.query.controller;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.nhom1.productservice.query.queries.GetTrendingProductsQuery;
 import com.nhom1.productservice.query.queries.getProductToAdvise;
 
 @RestController
+@RequestMapping("/api/v1/chatbot")
 public class WebhookController {
     @Autowired
     private QueryGateway queryGateway;
@@ -92,7 +94,7 @@ public class WebhookController {
                 buttons.add(button);
 
                 Map<String, Object> header = new HashMap<>();
-                header.put("imgSrc", "http://localhost:8080/" + linkImages(productDTO.getImages())[0]);
+                header.put("imgSrc", "http://localhost:9000/" + linkImages(productDTO.getImages())[0]);
                 header.put("overlayText", String.valueOf(productDTO.getProductPrice()));
 
                 Map<String, Object> payloadItem = new HashMap<>();
@@ -205,7 +207,7 @@ public class WebhookController {
 
             Map<String, Object> header = new HashMap<>();
             header.put("overlayText", product.getProductPrice() + "đ");
-            header.put("imgSrc", "http://localhost:8080/" + linkImages(product.getImages())[0]);
+            header.put("imgSrc", "http://localhost:9000/" + linkImages(product.getImages())[0]);
 
             Map<String, Object> payloadCard = new HashMap<>();
             payloadCard.put("title", product.getProductName());

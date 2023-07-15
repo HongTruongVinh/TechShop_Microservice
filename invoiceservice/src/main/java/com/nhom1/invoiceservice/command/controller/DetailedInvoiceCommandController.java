@@ -36,7 +36,7 @@ public class DetailedInvoiceCommandController {
     }
 
     @DeleteMapping("/{invoiceId}")
-    public String deleteInvoice(@PathVariable int invoiceId) {
+    public String deleteInvoice(@PathVariable String invoiceId) {
         DeleteDetailedInvoiceCommand command = new DeleteDetailedInvoiceCommand(invoiceId);
         commandGateway.sendAndWait(command);
         return "deleted Detailed Invoice";

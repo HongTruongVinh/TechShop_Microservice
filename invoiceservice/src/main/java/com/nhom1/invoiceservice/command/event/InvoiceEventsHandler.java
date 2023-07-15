@@ -18,7 +18,7 @@ public class InvoiceEventsHandler {
     }
     @EventHandler
     public void on(InvoiceUpdateEvent event) {
-        Invoice invoice = invoiceRepository.getById(event.getInvoiceID());
+        Invoice invoice = invoiceRepository.findInvoiceById(event.getInvoiceID());
         invoice.setUserID(event.getUserID());
         invoice.setTotalCost(event.getTotalCost());
         invoice.setInvoiceDate(event.getInvoiceDate());
@@ -32,7 +32,7 @@ public class InvoiceEventsHandler {
     @EventHandler
     public void on(InvoiceCreateEvent event) {
         Invoice invoice = new Invoice();
-        invoice.setInvoiceID(event.getInvoiceID());
+        invoice.set_id(event.getInvoiceID());
         invoice.setUserID(event.getUserID());
         invoice.setTotalCost(event.getTotalCost());
         invoice.setInvoiceDate(event.getInvoiceDate());

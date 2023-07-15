@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "1",
+    "productID": "54",
+    "invoiceID": "1",
+    "quantity": 1,
+    "price": 12000000,
+    "totalPrice": 12000000,
+    "isReviewed": false
+  },
+  {
+    "_id": "2",
+    "productID": "52",
+    "invoiceID": "1",
+    "quantity": 1,
+    "price": 3000000,
+    "totalPrice": 3000000,
+    "isReviewed": false
+  },
+  {
+    "_id": "3",
+    "productID": "50",
+    "invoiceID": "1",
+    "quantity": 1,
+    "price": 23000000,
+    "totalPrice": 23000000,
+    "isReviewed": false
+  },
+  {
+    "_id": "4",
+    "productID": "1",
+    "invoiceID": "1",
+    "quantity": 1,
+    "price": 4000000,
+    "totalPrice": 4000000,
+    "isReviewed": false
+  }
+]

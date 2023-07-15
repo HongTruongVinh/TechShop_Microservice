@@ -1,27 +1,50 @@
 package com.nhom1.invoiceservice.command.data;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "SHIPPINGINFO")
+@Table(name = "shippinginfo")
 public class ShippingInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int shippingInfoID;
-    private int invoiceID;
+    private String _id;
+    private String invoiceID;
     private String fullName;
     private String phoneNumber;
     private String address;
+    
+	public String get_id() {
+		return _id;
+	}
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+	public String getInvoiceID() {
+		return invoiceID;
+	}
+	public void setInvoiceID(String invoiceID) {
+		this.invoiceID = invoiceID;
+	}
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+    
+    
 }

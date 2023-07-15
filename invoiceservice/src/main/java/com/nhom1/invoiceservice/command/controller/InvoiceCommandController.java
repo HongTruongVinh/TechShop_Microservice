@@ -15,7 +15,7 @@ import com.nhom1.invoiceservice.command.command.UpdateInvoiceCommand;
 import com.nhom1.invoiceservice.command.model.InvoiceRequestModel;
 
 @RestController
-@RequestMapping("/api/v1/invoices")
+@RequestMapping("/api/v1/invoice")
 public class InvoiceCommandController {
     @Autowired
     private CommandGateway commandGateway;
@@ -39,7 +39,7 @@ public class InvoiceCommandController {
     }
 
     @DeleteMapping("/{invoiceId}")
-    public String deleteInvoice(@PathVariable int invoiceId) {
+    public String deleteInvoice(@PathVariable String invoiceId) {
         DeleteInvoiceCommand command = new DeleteInvoiceCommand(invoiceId);
         commandGateway.sendAndWait(command);
         return "deleted Invoice";

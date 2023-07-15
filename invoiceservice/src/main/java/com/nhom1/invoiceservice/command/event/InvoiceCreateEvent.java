@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InvoiceCreateEvent {
-   private int invoiceID;
-	private int userID;
+	private String invoiceID;
+	private String userID;
 	private int totalCost;
 	private String invoiceDate;
 	private String shippingDate;
@@ -17,16 +17,16 @@ public class InvoiceCreateEvent {
 	private boolean otherShippingAddress;
 	private String statusInvoice= "PENDING";
 	private String userInvoiceIndex;
-	public int getInvoiceID() {
+	public String getInvoiceID() {
 		return invoiceID;
 	}
-	public void setInvoiceID(int invoiceID) {
+	public void setInvoiceID(String invoiceID) {
 		this.invoiceID = invoiceID;
 	}
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 	public int getTotalCost() {
